@@ -50,23 +50,23 @@ env:
 ## Endpoints
 - ### Authentication Endpoints
 
-- Endpoint: GET /api/auth/google/login
+### - Endpoint: GET /api/auth/google/login
 - Description: Initiates Google authentication.
 - Usage: Redirects the user to the Google login page.
 - Google Authentication Callback
 
-- Endpoint: GET /api/auth/google/redirect
+### - Endpoint: GET /api/auth/google/redirect
 - Description: Handles the Google callback after login.
 - If the user does not exist in the database, a new account is created.
 ### Authentication Status
 
-- Endpoint: GET /api/auth/status
+### - Endpoint: GET /api/auth/status
 - Description: Checks if the user is authenticated.
 ### Response:
 - { msg: "Authenticated" } if logged in.
 - { msg: "Not Authenticated" } if not logged in.
   
-How It Works?
+# How It Works?
 ### Login Flow:
 
 User visits /api/auth/google/login.
@@ -83,7 +83,7 @@ User information is fetched from Google and stored in the PostgreSQL database us
 
 - /api/auth/status checks if the current session is authenticated.
 ### Project Structure
-src/
+`src/
 ├── auth/
 │   ├── auth.controller.ts      # Defines authentication-related endpoints
 │   ├── auth.guard.ts           # Google authentication guard using Passport
@@ -92,7 +92,7 @@ src/
 ├── prisma/
 │   ├── schema.prisma           # Database schema
 │   ├── seed.ts                 # Optional: Script for seeding the database
-├── main.ts                     # Entry point for the application
+├── main.ts                     # Entry point for the application`
 
 ## Technologies Used
 ### NestJS: Backend framework for building scalable server-side applications.
