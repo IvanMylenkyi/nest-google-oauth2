@@ -1,72 +1,109 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+### Google Authentication with NestJS, Prisma, and PostgreSQL
+This is a pet project that demonstrates Google authentication using NestJS, Passport, Prisma, and PostgreSQL. The project provides an API for authenticating users via Google, managing user sessions, and storing user data in a PostgreSQL database.
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
+## Features
+### - Google Authentication:
+- Login with Google using OAuth 2.0.
+- If the user does not exist in the database, their account is created upon login.
+- If the user exists, they are authenticated and granted access.
+### Session Management:
+- Status check for user authentication.
 ## Installation
+### Prerequisites
+- Node.js (>= 16.x)
+- PostgreSQL
+- A Google Developer Account for setting up OAuth 2.0 credentials.
+## Steps
+- Clone the repository:
+```git clone https://github.com/your-username/your-repo.git ```
+``` cd your-repo ```
+### Install dependencies:
+``` npm install ```
+### Set up the database:
+- Create a PostgreSQL database.
+### Configure Prisma:
+- Update DATABASE_URL in the .env file with your database connection string.
+- env: 
+DATABASE_URL="postgresql://username:password@localhost:5432/database_name"
 
-```bash
-$ npm install
-```
+### Deploy Prisma schema to your database:
 
-## Running the app
+``` npx prisma db push ```
+Configure Google OAuth:
 
-```bash
-# development
-$ npm run start
+Create a new project on the Google Cloud Console.
+Set up OAuth 2.0 credentials:
+Redirect URI: http://localhost:3000/api/auth/google/redirect
+Update .env with the credentials:
+env
+Copy code
+GOOGLE_CLIENT_ID="your-google-client-id"
+GOOGLE_CLIENT_SECRET="your-google-client-secret"
+Run the project:
 
-# watch mode
-$ npm run start:dev
+bash
+Copy code
+npm run start:dev
+Endpoints
+Authentication Endpoints
+Login with Google
 
-# production mode
-$ npm run start:prod
-```
+Endpoint: GET /api/auth/google/login
+Description: Initiates Google authentication.
+Usage: Redirects the user to the Google login page.
+Google Authentication Callback
 
-## Test
+Endpoint: GET /api/auth/google/redirect
+Description: Handles the Google callback after login.
+If the user does not exist in the database, a new account is created.
+Authentication Status
 
-```bash
-# unit tests
-$ npm run test
+Endpoint: GET /api/auth/status
+Description: Checks if the user is authenticated.
+Response:
+{ msg: "Authenticated" } if logged in.
+{ msg: "Not Authenticated" } if not logged in.
+How It Works
+Login Flow:
 
-# e2e tests
-$ npm run test:e2e
+User visits /api/auth/google/login.
+The app redirects to Google OAuth.
+After selecting an account, Google redirects the user back to /api/auth/google/redirect.
+The server:
+Checks if the user exists in the database.
+If the user exists, they are logged in.
+If the user does not exist, their data is saved in the database, and they are logged in.
+User Data:
 
-# test coverage
-$ npm run test:cov
-```
+User information is fetched from Google and stored in the PostgreSQL database using Prisma.
+Authentication Status:
 
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+/api/auth/status checks if the current session is authenticated.
+Project Structure
+plaintext
+Copy code
+src/
+├── auth/
+│   ├── auth.controller.ts      # Defines authentication-related endpoints
+│   ├── auth.guard.ts           # Google authentication guard using Passport
+│   ├── auth.service.ts         # Handles authentication logic
+│   ├── google.strategy.ts      # Passport strategy for Google OAuth
+├── prisma/
+│   ├── schema.prisma           # Database schema
+│   ├── seed.ts                 # Optional: Script for seeding the database
+├── main.ts                     # Entry point for the application
+Technologies Used
+NestJS: Backend framework for building scalable server-side applications.
+Passport: Middleware for authentication.
+Prisma: ORM for database operations.
+PostgreSQL: Relational database for storing user data.
+Future Improvements
+Implement session management with JWT for better scalability.
+Add support for multiple OAuth providers (e.g., Facebook, GitHub).
+Include role-based access control (RBAC) for user authorization.
+Author
+Created by Your Name.
+Feel free to fork and contribute! 😊
 
 ## License
 
