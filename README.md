@@ -2,7 +2,7 @@
 This is a pet project that demonstrates Google authentication using NestJS, Passport, Prisma, and PostgreSQL. The project provides an API for authenticating users via Google, managing user sessions, and storing user data in a PostgreSQL database.
 
 ## Features
-### - Google Authentication:
+- ### - Google Authentication:
 - Login with Google using OAuth 2.0.
 - If the user does not exist in the database, their account is created upon login.
 - If the user exists, they are authenticated and granted access.
