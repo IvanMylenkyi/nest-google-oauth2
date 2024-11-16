@@ -60,7 +60,7 @@ env:
 - If the user does not exist in the database, a new account is created.
 ### Authentication Status
 
-- #### Endpoint: GET /api/auth/status
+- ### Endpoint: GET /api/auth/status
 - Description: Checks if the user is authenticated.
 ### Response:
 - { msg: "Authenticated" } if logged in.
