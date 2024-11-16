@@ -15,15 +15,17 @@ This is a pet project that demonstrates Google authentication using NestJS, Pass
 - A Google Developer Account for setting up OAuth 2.0 credentials.
 ## Steps
 - Clone the repository:
-```git clone https://github.com/your-username/your-repo.git ```
-``` cd your-repo ```
+`git clone https://github.com/your-username/your-repo.git
+ cd your-repo `
+
 ### Install dependencies:
 ``` npm install ```
 ### Set up the database:
 - Create a PostgreSQL database.
 ### Configure Prisma:
 - Update DATABASE_URL in the .env file with your database connection string.
-- env: 
+- env:
+   
 DATABASE_URL="postgresql://username:password@localhost:5432/database_name"
 
 ### Deploy Prisma schema to your database:
