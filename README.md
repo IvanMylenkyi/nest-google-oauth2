@@ -50,17 +50,17 @@ env:
 ## Endpoints
 - ### Authentication Endpoints
 
-### - Endpoint: GET /api/auth/google/login
+- ### Endpoint: GET /api/auth/google/login
 - Description: Initiates Google authentication.
 - Usage: Redirects the user to the Google login page.
 - Google Authentication Callback
 
-### - Endpoint: GET /api/auth/google/redirect
+- ### Endpoint: GET /api/auth/google/redirect
 - Description: Handles the Google callback after login.
 - If the user does not exist in the database, a new account is created.
 ### Authentication Status
 
-### - Endpoint: GET /api/auth/status
+- #### Endpoint: GET /api/auth/status
 - Description: Checks if the user is authenticated.
 ### Response:
 - { msg: "Authenticated" } if logged in.
