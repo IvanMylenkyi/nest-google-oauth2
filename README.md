@@ -82,23 +82,12 @@ User information is fetched from Google and stored in the PostgreSQL database us
 ### Authentication Status:
 
 - /api/auth/status checks if the current session is authenticated.
-### Project Structure
-`src/
-├── auth/
-│   ├── auth.controller.ts      # Defines authentication-related endpoints
-│   ├── auth.guard.ts           # Google authentication guard using Passport
-│   ├── auth.service.ts         # Handles authentication logic
-│   ├── google.strategy.ts      # Passport strategy for Google OAuth
-├── prisma/
-│   ├── schema.prisma           # Database schema
-│   ├── seed.ts                 # Optional: Script for seeding the database
-├── main.ts                     # Entry point for the application`
 
 ## Technologies Used
-### NestJS: Backend framework for building scalable server-side applications.
-### Passport: Middleware for authentication.
-### Prisma: ORM for database operations.
-### PostgreSQL: Relational database for storing user data.
+- ### NestJS: Backend framework for building scalable server-side applications.
+- ### Passport: Middleware for authentication.
+- ### Prisma: ORM for database operations.
+- ### PostgreSQL: Relational database for storing user data.
 
 ## Author
 Created by Ivan Mylenkyi.
