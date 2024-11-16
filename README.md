@@ -15,7 +15,7 @@ This is a pet project that demonstrates Google authentication using NestJS, Pass
 - A Google Developer Account for setting up OAuth 2.0 credentials.
 ## Steps
 - Clone the repository:
-`git clone https://github.com/your-username/your-repo.git
+`git clone https://github.com/your-username/your-repo.git \n
  cd your-repo `
 
 ### Install dependencies:
